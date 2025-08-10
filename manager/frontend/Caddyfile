@@ -1,0 +1,8 @@
+# Caddyfile for serving the frontend in docker
+:80 {
+  bind 0.0.0.0
+  root * /usr/share/frontend
+  encode
+  file_server
+  try_files {path} /index.html
+}

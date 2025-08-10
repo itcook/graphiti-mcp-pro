@@ -1,0 +1,97 @@
+name: graphiti-mcp-pro
+
+networks:
+  default:
+    driver: bridge
+
+volumes:
+  neo4j_data:
+  neo4j_logs:
+  manager_db:
+
+services:
+  # Neo4j Database
+  neo4j:
+    image: neo4j:2025.06.2
+    container_name: graphiti-neo4j
+    ports:
+      - '7474:7474' # HTTP
+      - '7687:7687' # Bolt
+    environment:
+      - TZ=${TZ:-UTC}
+      - NEO4J_AUTH=${NEO4J_USER:-neo4j}/${NEO4J_PASSWORD:-graphiti}
+      - NEO4J_server_memory_heap_initial__size=512m
+      - NEO4J_server_memory_heap_max__size=1G
+      - NEO4J_server_memory_pagecache_size=512m
+    volumes:
+      - neo4j_data:/data
+      - neo4j_logs:/logs
+    healthcheck:
+      test: ['CMD', 'wget', '-O', '/dev/null', 'http://localhost:7474']
+      interval: 10s
+      timeout: 5s
+      retries: 5
+      start_period: 30s
+    networks:
+      - default
+    restart: unless-stopped
+
+  # Graphiti MCP Core Server with Manager Backend
+  mcp-with-manager:
+    build: .
+    pull_policy: never
+    image: graphiti-mcp-pro-server
+    container_name: graphiti-mcp-pro-server
+    env_file:
+      - path: .env
+        required: false
+    depends_on:
+      neo4j:
+        condition: service_healthy
+    environment:
+      - TZ=${TZ:-UTC}
+      - NEO4J_URI=${NEO4J_URI:-bolt://neo4j:7687}
+      - NEO4J_USER=${NEO4J_USER:-neo4j}
+      - NEO4J_PASSWORD=${NEO4J_PASSWORD:-graphiti}
+      - MCP_PORT=${MCP_PORT:-8082}
+      - MANAGER_SERVER_PORT=${MANAGER_SERVER_PORT:-7072}
+      - CRYPTO_SECRET=${CRYPTO_SECRET:-X@}XcfV]MKXbiP,i2k4wBZQbf7wot7et}
+      - CRYPTO_SALT=${CRYPTO_SALT:-K8Zdm)0Cos^tFVdX}
+      - LLM_BASE_URL=${LLM_BASE_URL}
+      - LLM_API_KEY=${LLM_API_KEY}
+      - LLM_MODEL_NAME=${LLM_MODEL_NAME}
+      - LLM_TEMPERATURE=${LLM_TEMPERATURE:-0.0}
+      - SMALL_LLM_MODEL_NAME=${SMALL_LLM_MODEL_NAME:-}
+      - SMALL_LLM_BASE_URL=${SMALL_LLM_BASE_URL:-}
+      - SMALL_LLM_API_KEY=${SMALL_LLM_API_KEY:-}
+      - EMBEDDING_BASE_URL=${EMBEDDING_BASE_URL}
+      - EMBEDDING_API_KEY=${EMBEDDING_API_KEY:-}
+      - EMBEDDING_MODEL_NAME=${EMBEDDING_MODEL_NAME}
+      - SEMAPHORE_LIMIT=${SEMAPHORE_LIMIT:-20}
+      - ENABLE_SYNC_RETURN=${ENABLE_SYNC_RETURN:-false}
+      - LOG_SAVE_DAYS=${LOG_SAVE_DAYS:-7}
+      - CLEAN_LOGS_AT_HOUR=${CLEAN_LOGS_AT_HOUR:-12}
+    volumes:
+      - manager_db:/app/db
+    networks:
+      - default
+    ports:
+      - '${MCP_PORT:-8082}:${MCP_PORT:-8082}'
+      - '${MANAGER_SERVER_PORT:-7072}:${MANAGER_SERVER_PORT:-7072}'
+    restart: unless-stopped
+
+  # Graphiti Manager Frontend
+  manager-frontend:
+    build:
+      context: ./manager/frontend
+      args:
+        - VITE_MCP_PORT=${MCP_PORT:-8082}
+        - VITE_MANAGER_SERVER_PORT=${MANAGER_SERVER_PORT:-7072}
+    pull_policy: never
+    image: graphiti-mcp-pro-frontend
+    container_name: graphiti-mcp-pro-frontend
+    networks:
+      - default
+    ports:
+      - '${MANAGER_CLIENT_PORT:-6062}:80'
+    restart: unless-stopped
