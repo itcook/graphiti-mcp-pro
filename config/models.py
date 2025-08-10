@@ -12,6 +12,7 @@ from utils import logger
 import os
 from .manager import config_manager
 from .exceptions import ConfigValidationError
+from graphiti_core.llm_client.config import LLMConfig
 
 
 T = TypeVar('T', bound='BaseConfig')
@@ -70,7 +71,7 @@ class SmallLLMCompatConfig(BaseConfig):
     base_url: str = Field(alias='small_llm_base_url', description='Reranker API base URL')
     model: str = Field(alias='small_llm_model_name', description='Reranker model name')
     
-    def is_same_as_llm(self, llm_config: LLMCompatConfig) -> bool:
+    def is_same_as_llm(self, llm_config: LLMCompatConfig | LLMConfig) -> bool:
         """Check if small LLM config is same as main LLM config"""
         return (self.api_key == llm_config.api_key and
                 self.base_url == llm_config.base_url and

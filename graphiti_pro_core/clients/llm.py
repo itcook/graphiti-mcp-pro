@@ -79,9 +79,10 @@ class LLMCompatClient(LLMClient):
                     temperature=self.config.temperature # Use main model temperature
                 )
                 logger.debug(f"🔹 Using small model: {self.small_config.model} @ {self.small_config.base_url}")
+                return self.small_client, _config
             else:
                 logger.debug(f"🔸 Using main model for small task: {self.config.model}")
-            return self.small_client, _config
+                return self.small_client, self.config
         else:
             logger.debug(f"🔸 Using main model: {self.config.model} @ {self.config.base_url}")
             return self.main_client, self.config
