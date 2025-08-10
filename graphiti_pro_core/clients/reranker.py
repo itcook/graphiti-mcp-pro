@@ -16,7 +16,7 @@ from graphiti_core.prompts import Message
 
 import numpy as np
 
-from config import SmallLLMCompatConfig
+from config import SmallLLMCompatConfig, config_manager
 from utils import logger
 
 
@@ -60,6 +60,7 @@ class RerankerCompatClient(CrossEncoderClient):
         ]
 
         try:
+            max_concurrent = config_manager.get_config(['semaphore_limit'])['semaphore_limit']
             responses = await semaphore_gather(
                 *[
                     self.client.chat.completions.create(
@@ -73,7 +74,7 @@ class RerankerCompatClient(CrossEncoderClient):
                     )
                     for messages in openai_messages_list
                 ],
-                max_concurrent=10,
+                max_concurrent=max_concurrent,
             )
 
             # Process responses and assign scores
