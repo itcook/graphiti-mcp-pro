@@ -49,7 +49,7 @@
 > [!NOTE]
 > 配置 embedding 模型时需要注意，其调用的路径和上面两个 LLM 是不一样的，LLM 调用的路径是对话补全的路径，即 `{base_url}/chat/completions`，而文本嵌入的路径调用的是 `{base_url}/embeddings`，如果你通过管理后台配置时选择了「与大模型相同」，请确保你配置的大模型支持文本嵌入
 >
-> 另外，如果你通过 docker compose 方式运行服务，而 embedding 模型是通过本地运行的，那么 embedding 的 base_url 需要配置为 `http://host.docker.internal:{port}`，其中的端口需要根据你本地运行的端口进行调整
+> 另外，如果你通过 docker compose 方式运行服务，而模型(不管是 LLM 还是 embedding 模型)是通过本地运行的，那么 base_url 需要配置为 `http://host.docker.internal:{port}`，其中的端口需要根据你本地运行的端口进行调整
 
 ### 完备的管理端
 

@@ -49,7 +49,7 @@ The original unified LLM configuration has been split into three independent con
 > [!NOTE]
 > When configuring the embedding model, note that its API path differs from the two LLMs above. LLMs use the chat completion path `{base_url}/chat/completions`, while text embedding uses `{base_url}/embeddings`. If you select "Same as Large Model" in the management backend, ensure your configured large model supports text embedding.
 >
-> Additionally, if you run the service via docker compose while the embedding model is running locally, the embedding base_url needs to be configured as `http://host.docker.internal:{port}`, where the port should be adjusted according to your local running port.
+> Additionally, if you run the service via docker compose while the LLM or embedding model is running locally, the base_url needs to be configured as `http://host.docker.internal:{port}`, where the port should be adjusted according to your local running port.
 
 ### Comprehensive Management Platform
 
