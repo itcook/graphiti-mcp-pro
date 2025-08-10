@@ -3,6 +3,7 @@
 **English** | [中文](README_CN.md)
 
 > **About Graphiti**
+>
 > Graphiti is a framework for building and querying temporally-aware knowledge graphs, specifically tailored for AI agents operating in dynamic environments. Unlike traditional retrieval-augmented generation (RAG) methods, Graphiti continuously integrates user interactions, structured and unstructured enterprise data, and external information into a coherent, queryable graph. The framework supports incremental data updates, efficient retrieval, and precise historical queries without requiring complete graph recomputation, making it suitable for developing interactive, context-aware AI applications.
 
 This project is an enhanced memory repository MCP service and management platform based on [Graphiti](https://github.com/getzep/graphiti). Compared to the original project's [MCP service](https://github.com/getzep/graphiti/tree/main/mcp_server), it offers the following core advantages: enhanced core capabilities, broader AI model compatibility, and comprehensive visual management interface.
@@ -84,9 +85,10 @@ To provide better user experience and observability, we have developed a complet
    docker compose up -d
    ```
 
-   > [!TIP]
-   > If the project has updates and you need to rebuild the image, use `docker compose up -d --build`.
-   > Rest assured, data will be persistently saved in the external database and will not be lost.
+> [!TIP]
+>
+> If the project has updates and you need to rebuild the image, use `docker compose up -d --build`.
+> Rest assured, data will be persistently saved in the external database and will not be lost.
 
 4. **Access Management Interface**
    Default address: http://localhost:6062

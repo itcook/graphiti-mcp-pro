@@ -3,6 +3,7 @@
 [English](README.md) | **中文**
 
 > **关于 Graphiti**
+>
 > Graphiti 是一个用于构建和查询具有时间感知的知识图谱的框架，专门针对在动态环境中运行的 AI 代理。与传统的检索增强生成（RAG）方法不同，Graphiti 持续地将用户交互、结构化和非结构化企业数据以及外部信息整合到一个连贯、可查询的图谱中。该框架支持增量数据更新、高效检索和精确的历史查询，无需重新计算整个图谱，使其适用于开发交互式、情境感知的 AI 应用。
 
 本项目是基于 [Graphiti](https://github.com/getzep/graphiti) 实现的增强版记忆库 MCP 服务及管理端，相比原项目的 [MCP 服务](https://github.com/getzep/graphiti/tree/main/mcp_server)，具有以下核心优势：增强的核心能力、更广泛的 AI 模型兼容性、完备的可视化管理界面。
@@ -87,9 +88,9 @@
    docker compose up -d
    ```
 
-   > [!TIP]
-   > 如果项目有更新，需要重新构建镜像，请使用 `docker compose up -d --build` 命令。
-   > 请放心，数据会持久保存在容器外的数据库中，不会丢失。
+> [!TIP]
+> 如果项目有更新，需要重新构建镜像，请使用 `docker compose up -d --build` 命令。
+> 请放心，数据会持久保存在容器外的数据库中，不会丢失。
 
 4. **访问管理界面**
    默认地址：http://localhost:6062
