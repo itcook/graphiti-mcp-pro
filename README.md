@@ -53,6 +53,8 @@ The original unified LLM configuration has been split into three independent con
 
 ### Comprehensive Management Platform
 
+![manager-ui-en](https://github.com/user-attachments/assets/3d70c32e-39ee-400e-bbea-3a6e6d4c57ed)
+
 To provide better user experience and observability, we have developed a complete management backend and Web UI. Through the management interface, you can:
 
 - **Service Control**: Start, stop, restart MCP service
@@ -88,6 +90,7 @@ To provide better user experience and observability, we have developed a complet
 > [!TIP]
 >
 > If the project has updates and you need to rebuild the image, use `docker compose up -d --build`.
+>
 > Rest assured, data will be persistently saved in the external database and will not be lost.
 
 4. **Access Management Interface**
