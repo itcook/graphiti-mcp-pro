@@ -73,6 +73,7 @@
 
    ```bash
    git clone http://github.com/itcook/graphiti-mcp-pro
+   # 或 git clone git@github.com:itcook/graphiti-mcp-pro.git
    cd graphiti-mcp-pro
    ```
 
@@ -112,6 +113,7 @@
 
    ```bash
    git clone http://github.com/itcook/graphiti-mcp-pro
+   # 或 git clone git@github.com:itcook/graphiti-mcp-pro.git
    cd graphiti-mcp-pro
    ```
 

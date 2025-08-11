@@ -70,6 +70,7 @@ To provide better user experience and observability, we have developed a complet
 
    ```bash
    git clone http://github.com/itcook/graphiti-mcp-pro
+   # or git clone git@github.com:itcook/graphiti-mcp-pro.git
    cd graphiti-mcp-pro
    ```
 
@@ -110,6 +111,7 @@ To provide better user experience and observability, we have developed a complet
 
    ```bash
    git clone http://github.com/itcook/graphiti-mcp-pro
+   # or git clone git@github.com:itcook/graphiti-mcp-pro.git
    cd graphiti-mcp-pro
    ```
 
