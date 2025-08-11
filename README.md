@@ -125,7 +125,7 @@ To provide better user experience and observability, we have developed a complet
 
    ```bash
    # Copy example configuration file
-   mv .env.example.cn .env
+   mv .env.example.en .env
    # Edit .env file according to the instructions
    ```
 
