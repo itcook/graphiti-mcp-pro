@@ -72,7 +72,7 @@
 1. **克隆项目**
 
    ```bash
-   git clone http://github.com/ueworks/graphiti-mcp-pro
+   git clone http://github.com/itcook/graphiti-mcp-pro
    cd graphiti-mcp-pro
    ```
 
@@ -111,7 +111,7 @@
 1. **克隆项目**
 
    ```bash
-   git clone http://github.com/ueworks/graphiti-mcp-pro
+   git clone http://github.com/itcook/graphiti-mcp-pro
    cd graphiti-mcp-pro
    ```
 
