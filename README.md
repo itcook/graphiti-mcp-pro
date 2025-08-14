@@ -82,6 +82,10 @@ To provide better user experience and observability, we have developed a complet
    # Edit .env file according to the instructions
    ```
 
+> [!NOTE]
+>
+> If you want to continue using the previous Graphiti MCP data, set the NEO4J\_ related parameters in the .env file to your Neo4j database connection information, and keep other parameters as default.
+
 3. **Start Services**
 
    ```bash
