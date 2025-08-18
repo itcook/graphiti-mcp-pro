@@ -8,7 +8,7 @@ from enum import Enum
 from typing import Dict, Any, Optional, List
 from utils.is_ import is_in_docker
 
-neo_uri = 'bolt://neo4j:7687' if is_in_docker() else 'bolt://localhost:7687'
+DEFAULT_NEO4J_URI = 'bolt://neo4j:7687' if is_in_docker() else 'bolt://localhost:7687'
 
 class ConfigType(Enum):
     """Configuration value types"""
@@ -144,7 +144,7 @@ CONFIG_METADATA: Dict[str, Dict[str, Any]] = {
     'neo4j_uri': {
         'env_key': 'NEO4J_URI',
         'type': ConfigType.STRING,
-        'default': neo_uri,
+        'default': DEFAULT_NEO4J_URI,
         'group': ConfigGroup.NEO4J,
         'description': 'Neo4j database URI'
     },
