@@ -141,7 +141,7 @@ CONFIG_METADATA: Dict[str, Dict[str, Any]] = {
     'neo4j_uri': {
         'env_key': 'NEO4J_URI',
         'type': ConfigType.STRING,
-        'default': 'bolt://localhost:7687',
+        'default': 'bolt://neo4j:7687',
         'group': ConfigGroup.NEO4J,
         'description': 'Neo4j database URI'
     },
