@@ -87,9 +87,14 @@ services:
       args:
         - VITE_MCP_PORT=${MCP_PORT:-8082}
         - VITE_MANAGER_SERVER_PORT=${MANAGER_SERVER_PORT:-7072}
+        - VITE_MANAGER_SERVER_HOST=${MANAGER_SERVER_HOST:-}
+        - VITE_API_BASE_URL=${VITE_API_BASE_URL:-}
     pull_policy: never
     image: graphiti-mcp-pro-frontend
     container_name: graphiti-mcp-pro-frontend
+    environment:
+      # Caddy 运行时需要的环境变量
+      - VITE_MANAGER_SERVER_PORT=${MANAGER_SERVER_PORT:-7072}
     networks:
       - default
     ports:

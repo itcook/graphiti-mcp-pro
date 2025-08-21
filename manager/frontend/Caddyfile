@@ -1,8 +1,24 @@
 # Caddyfile for serving the frontend in docker
 :80 {
   bind 0.0.0.0
-  root * /usr/share/frontend
-  encode
-  file_server
-  try_files {path} /index.html
+  
+  # API 代理 - 将 /api 请求转发到后端服务
+  handle /api/* {
+    # 直接转发到后端，保持 /api 前缀
+    # 使用环境变量 {$VITE_MANAGER_SERVER_PORT} 支持动态端口配置
+    reverse_proxy mcp-with-manager:{$VITE_MANAGER_SERVER_PORT} {
+      # 健康检查
+      health_uri /health
+      health_interval 30s
+      health_timeout 10s
+    }
+  }
+  
+  # 前端静态文件服务
+  handle {
+    root * /usr/share/frontend
+    encode gzip
+    file_server
+    try_files {path} /index.html
+  }
 }
